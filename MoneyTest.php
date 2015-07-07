@@ -17,7 +17,7 @@ class TestMoney extends PHPUnit_Framework_TestCase
         $this->assertEquals(new Dollar(15), $five->times(3));
     }
 
-    // PHP thankfully gives us memberwise equality for free
+    // PHP thankfully gives us member-wise equality for free
     public function testEquality()
     {
         $this->assertEquals(new Dollar(5), new Dollar(5));
