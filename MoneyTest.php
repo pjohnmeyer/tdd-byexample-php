@@ -19,4 +19,11 @@ class TestMoney extends PHPUnit_Framework_TestCase
         $product = $five->times(3);
         $this->assertEquals(15, $product->amount);
     }
+
+    // PHP thankfully gives us memberwise equality for free
+    public function testEquality()
+    {
+        $this->assertEquals(new Dollar(5), new Dollar(5));
+        $this->assertNotEquals(new Dollar(5), new Dollar(6));
+    }
 }

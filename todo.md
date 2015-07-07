@@ -4,4 +4,6 @@ x $5 * 2 = $10
 * Make 'amount' private
 x Dollar side-effects?
 * Money rounding?
+x equals()
+* hashCode()
 
