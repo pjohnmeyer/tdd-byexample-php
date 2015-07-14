@@ -8,7 +8,10 @@
  */
 class Money
 {
-    protected $amount;
+    public function __construct($amount)
+    {
+        $this->amount = $amount;
+    }
 
     public function times($multiplier)
     {

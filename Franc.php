@@ -11,6 +11,6 @@ class Franc extends Money
 {
     public function __construct($amount)
     {
-        $this->amount = $amount;
+        parent::__construct($amount);
     }
 }
