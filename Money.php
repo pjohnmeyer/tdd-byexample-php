@@ -14,4 +14,10 @@ class Money
     {
         return new Dollar($amount);
     }
+
+    static public function franc($amount)
+    {
+        return new Franc($amount);
+    }
+
 }
