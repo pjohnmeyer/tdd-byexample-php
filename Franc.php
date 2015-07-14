@@ -1,15 +1,14 @@
 <?php
 
+require_once 'Money.php';
 /**
  * Created by PhpStorm.
  * User: patrick.johnmeyer
  * Date: 7/6/15
  * Time: 11:24 PM
  */
-class Franc
+class Franc extends Money
 {
-    private $amount;
-
     public function __construct($amount)
     {
         $this->amount = $amount;
