@@ -12,12 +12,12 @@ class Money
 
     static public function dollar($amount)
     {
-        return new Dollar($amount);
+        return new Dollar($amount, 'USD');
     }
 
     static public function franc($amount)
     {
-        return new Franc($amount);
+        return new Franc($amount, 'CHF');
     }
 
     public function currency()
