@@ -6,7 +6,7 @@
  * Date: 7/13/15
  * Time: 11:47 PM
  */
-class Money
+abstract class Money
 {
     protected $amount;
 
@@ -20,4 +20,5 @@ class Money
         return new Franc($amount);
     }
 
+    public abstract function currency();
 }
