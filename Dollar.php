@@ -13,6 +13,7 @@ class Dollar extends Money
     public function __construct($amount)
     {
         $this->amount = $amount;
+        $this->currency = "USD";
     }
 
     public function times($multiplier)
@@ -22,6 +23,6 @@ class Dollar extends Money
 
     public function currency()
     {
-        return "USD";
+        return $this->currency;
     }
 }
