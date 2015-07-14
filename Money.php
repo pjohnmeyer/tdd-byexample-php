@@ -12,6 +12,7 @@ class Money
 
     public function times($multiplier)
     {
-        return new Dollar($this->amount * $multiplier);
+        $child_class = get_class($this);
+        return new $child_class($this->amount * $multiplier);
     }
 }
