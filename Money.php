@@ -9,4 +9,9 @@
 class Money
 {
     protected $amount;
+
+    static public function dollar($amount)
+    {
+        return new Dollar($amount);
+    }
 }
