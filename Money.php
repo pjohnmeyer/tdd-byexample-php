@@ -9,6 +9,13 @@
 class Money
 {
     protected $amount;
+    private $currency;
+
+    public function __construct($amount, $currency)
+    {
+        $this->amount = $amount;
+        $this->currency = $currency;
+    }
 
     static public function dollar($amount)
     {
