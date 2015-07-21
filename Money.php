@@ -19,12 +19,12 @@ class Money
 
     static public function dollar($amount)
     {
-        return new Dollar($amount, 'USD');
+        return new Money($amount, 'USD');
     }
 
     static public function franc($amount)
     {
-        return new Franc($amount, 'CHF');
+        return new Money($amount, 'CHF');
     }
 
     public function currency()
@@ -34,13 +34,6 @@ class Money
 
     public function times($multiplier)
     {
-        if ($this->currency === 'CHF')
-        {
-            return new Franc($this->amount * $multiplier, $this->currency);
-        }
-        else
-        {
-            return new Dollar($this->amount * $multiplier, $this->currency);
-        }
+        return new Money($this->amount * $multiplier, $this->currency);
     }
 }
