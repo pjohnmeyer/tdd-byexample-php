@@ -1,7 +1,6 @@
 <?php
 
-require_once 'Dollar.php';
-require_once 'Franc.php';
+require_once 'Money.php';
 
 /**
  * Created by PhpStorm.
