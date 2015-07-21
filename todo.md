@@ -1,5 +1,12 @@
 
 - [ ] $5 + 10 CHF = $10 if rate is 2:1
+- [ ] * $5 + $5 = $10
+
+
+
+
+---
+**New list**
 - [x] $5 * 2 = $10
 - [x] Make 'amount' private
 - [x] Dollar side-effects?
