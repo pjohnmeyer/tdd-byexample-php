@@ -8,7 +8,7 @@
  */
 class Money
 {
-    public function __construct($amount)
+    protected function __construct($amount)
     {
         $this->amount = $amount;
     }
