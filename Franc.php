@@ -9,8 +9,4 @@ require_once 'Money.php';
  */
 class Franc extends Money
 {
-    public function __construct($amount)
-    {
-        parent::__construct($amount);
-    }
 }
