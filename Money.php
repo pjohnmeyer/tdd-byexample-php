@@ -1,12 +1,14 @@
 <?php
 
+require_once 'Expression.php';
+
 /**
  * Created by PhpStorm.
  * User: patrick.johnmeyer
  * Date: 7/13/15
  * Time: 11:47 PM
  */
-class Money
+class Money implements Expression
 {
     protected $amount;
     protected $currency;
@@ -35,5 +37,10 @@ class Money
     public function times($multiplier)
     {
         return new Money($this->amount * $multiplier, $this->currency);
+    }
+
+    public function plus(Money $addend)
+    {
+        return new Money($this->amount + $addend->amount, $this->currency);
     }
 }
