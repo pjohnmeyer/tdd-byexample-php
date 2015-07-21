@@ -34,6 +34,13 @@ class Money
 
     public function times($multiplier)
     {
-        return new Franc($this->amount * $multiplier, $this->currency);
+        if ($this->currency === 'CHF')
+        {
+            return new Franc($this->amount * $multiplier, $this->currency);
+        }
+        else
+        {
+            return new Dollar($this->amount * $multiplier, $this->currency);
+        }
     }
 }
