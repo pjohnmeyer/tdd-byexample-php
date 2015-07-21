@@ -16,6 +16,6 @@ class Franc extends Money
 
     public function times($multiplier)
     {
-        return new Franc($this->amount * $multiplier, $this->currency);
+        return new Money($this->amount * $multiplier, $this->currency);
     }
 }
