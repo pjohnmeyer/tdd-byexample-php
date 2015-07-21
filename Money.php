@@ -31,4 +31,9 @@ class Money
     {
         return $this->currency;
     }
+
+    public function times($multiplier)
+    {
+        return new Franc($this->amount * $multiplier, $this->currency);
+    }
 }
