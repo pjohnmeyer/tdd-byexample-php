@@ -9,7 +9,7 @@
 class Money
 {
     protected $amount;
-    private $currency;
+    protected $currency;
 
     public function __construct($amount, $currency)
     {
