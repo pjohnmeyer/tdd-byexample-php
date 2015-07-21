@@ -9,7 +9,7 @@
 class Money
 {
     protected $amount;
-    private $currency;
+    protected $currency;
 
     public function __construct($amount, $currency)
     {
@@ -30,5 +30,17 @@ class Money
     public function currency()
     {
         return $this->currency;
+    }
+
+    public function times($multiplier)
+    {
+        if ($this->currency === 'CHF')
+        {
+            return new Franc($this->amount * $multiplier, $this->currency);
+        }
+        else
+        {
+            return new Dollar($this->amount * $multiplier, $this->currency);
+        }
     }
 }
