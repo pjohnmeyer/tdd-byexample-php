@@ -2,6 +2,7 @@
 
 require_once 'Money.php';
 require_once 'Bank.php';
+require_once 'Sum.php';
 
 /**
  * Created by PhpStorm.
