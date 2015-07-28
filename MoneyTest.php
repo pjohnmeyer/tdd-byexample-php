@@ -40,4 +40,17 @@ class TestMoney extends PHPUnit_Framework_TestCase
         $reduced = $bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(10), $reduced);
     }
+
+    public function testPlusReturnsSum()
+    {
+        $five = Money::dollar(5);
+        $sum = $five->plus($five);
+
+        // using assertInstanceOf where the type system handles things in the
+        // Java examples
+        $this->assertInstanceOf('Expression', $sum);
+        $this->assertInstanceOf('Sum', $sum);
+        $this->assertEquals($five, $sum->augend); // (FWIW I normally use "lhs" and "rhs")
+        $this->assertEquals($five, $sum->addend);
+    }
 }
