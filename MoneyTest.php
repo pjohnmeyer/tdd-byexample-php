@@ -12,6 +12,15 @@ require_once 'Sum.php';
  */
 class TestMoney extends PHPUnit_Framework_TestCase
 {
+    private static $fiveBucks;
+    private static $tenFrancs;
+
+    public static function setUpBeforeClass()
+    {
+        self::$fiveBucks = Money::dollar(5);
+        self::$tenFrancs = Money::franc(10);
+    }
+
     public function setUp()
     {
         $this->bank = new Bank();
@@ -20,9 +29,8 @@ class TestMoney extends PHPUnit_Framework_TestCase
 
     public function testMultiplication()
     {
-        $five = Money::dollar(5);
-        $this->assertEquals(Money::dollar(10), $five->times(2));
-        $this->assertEquals(Money::dollar(15), $five->times(3));
+        $this->assertEquals(Money::dollar(10), self::$fiveBucks->times(2));
+        $this->assertEquals(Money::dollar(15), self::$fiveBucks->times(3));
     }
 
     // PHP thankfully gives us member-wise equality for free
@@ -41,23 +49,21 @@ class TestMoney extends PHPUnit_Framework_TestCase
 
     public function testSimpleAddition()
     {
-        $five = Money::dollar(5);
-        $sum = $five->plus($five);
+        $sum = self::$fiveBucks->plus(self::$fiveBucks);
         $reduced = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(10), $reduced);
     }
 
     public function testPlusReturnsSum()
     {
-        $five = Money::dollar(5);
-        $sum = $five->plus($five);
+        $sum = self::$fiveBucks->plus(self::$fiveBucks);
 
         // using assertInstanceOf where the type system handles things in the
         // Java examples
         $this->assertInstanceOf('Expression', $sum);
         $this->assertInstanceOf('Sum', $sum);
-        $this->assertEquals($five, $sum->augend); // (FWIW I normally use "lhs" and "rhs")
-        $this->assertEquals($five, $sum->addend);
+        $this->assertEquals(self::$fiveBucks, $sum->augend); // (FWIW I normally use "lhs" and "rhs")
+        $this->assertEquals(self::$fiveBucks, $sum->addend);
     }
 
     public function testReduceSum()
@@ -86,27 +92,21 @@ class TestMoney extends PHPUnit_Framework_TestCase
 
     public function testMixedAddition()
     {
-        $fiveBucks = Money::dollar(5);
-        $tenFrancs = Money::franc(10);
-        $result = $this->bank->reduce($fiveBucks->plus($tenFrancs), 'USD');
+        $result = $this->bank->reduce(self::$fiveBucks->plus(self::$tenFrancs), 'USD');
         $this->assertEquals(Money::dollar(10), $result);
     }
 
     public function testSumPlusMoney()
     {
-        $fiveBucks = Money::dollar(5);
-        $tenFrancs = Money::franc(10);
-        $step1 = new Sum($fiveBucks, $tenFrancs);
-        $sum = $step1->plus($fiveBucks);
+        $step1 = new Sum(self::$fiveBucks, self::$tenFrancs);
+        $sum = $step1->plus(self::$fiveBucks);
         $result = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(15), $result);
     }
 
     public function testSumTimes()
     {
-        $fiveBucks = Money::dollar(5);
-        $tenFrancs = Money::franc(10);
-        $step1 = new Sum($fiveBucks, $tenFrancs);
+        $step1 = new Sum(self::$fiveBucks, self::$tenFrancs);
         $sum = $step1->times(2);
         $result = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(20), $result);
