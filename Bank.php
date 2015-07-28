@@ -22,6 +22,10 @@ class Bank
 
     public function rate($from, $to)
     {
+        if ($from === $to)
+        {
+            return 1;
+        }
         return $this->rateTable[$from][$to];
     }
 }
