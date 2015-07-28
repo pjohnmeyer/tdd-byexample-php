@@ -41,6 +41,6 @@ class Money implements Expression
 
     public function plus(Money $addend)
     {
-        return new Sum($this, $added);
+        return new Sum($this, $addend);
     }
 }
