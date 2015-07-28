@@ -105,4 +105,16 @@ class TestMoney extends PHPUnit_Framework_TestCase
         $result = $bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(15), $result);
     }
+
+    public function testSumTimes()
+    {
+        $fiveBucks = Money::dollar(5);
+        $tenFrancs = Money::franc(10);
+        $bank = new Bank();
+        $bank->addRate('CHF', 'USD', 2);
+        $step1 = new Sum($fiveBucks, $tenFrancs);
+        $sum = $step1->times(2);
+        $result = $bank->reduce($sum, 'USD');
+        $this->assertEquals(Money::dollar(20), $result);
+    }
 }
