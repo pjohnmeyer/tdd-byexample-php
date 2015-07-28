@@ -12,6 +12,12 @@ require_once 'Sum.php';
  */
 class TestMoney extends PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        $this->bank = new Bank();
+        $this->bank->addRate('CHF', 'USD', 2);
+    }
+
     public function testMultiplication()
     {
         $five = Money::dollar(5);
@@ -37,8 +43,7 @@ class TestMoney extends PHPUnit_Framework_TestCase
     {
         $five = Money::dollar(5);
         $sum = $five->plus($five);
-        $bank = new Bank();
-        $reduced = $bank->reduce($sum, 'USD');
+        $reduced = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(10), $reduced);
     }
 
@@ -58,39 +63,32 @@ class TestMoney extends PHPUnit_Framework_TestCase
     public function testReduceSum()
     {
         $sum = new Sum(Money::dollar(3), Money::dollar(4));
-        $bank = new Bank();
-        $result = $bank->reduce($sum, 'USD');
+        $result = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(7), $result);
     }
 
     public function testReduceMoney()
     {
-        $bank = new Bank();
-        $result = $bank->reduce(Money::dollar(1), 'USD');
+        $result = $this->bank->reduce(Money::dollar(1), 'USD');
         $this->assertEquals(Money::dollar(1), $result);
     }
 
     public function testReduceMoneyDifferentCurrency()
     {
-        $bank = new Bank();
-        $bank->addRate('CHF', 'USD', 2);
-        $result = $bank->reduce(Money::franc(2), 'USD');
+        $result = $this->bank->reduce(Money::franc(2), 'USD');
         $this->assertEquals(Money::dollar(1), $result);
     }
 
     public function testIdentity()
     {
-        $bank = new Bank();
-        $this->assertEquals(1, $bank->rate('USD', 'USD'));
+        $this->assertEquals(1, $this->bank->rate('USD', 'USD'));
     }
 
     public function testMixedAddition()
     {
         $fiveBucks = Money::dollar(5);
         $tenFrancs = Money::franc(10);
-        $bank = new Bank();
-        $bank->addRate('CHF', 'USD', 2);
-        $result = $bank->reduce($fiveBucks->plus($tenFrancs), 'USD');
+        $result = $this->bank->reduce($fiveBucks->plus($tenFrancs), 'USD');
         $this->assertEquals(Money::dollar(10), $result);
     }
 
@@ -98,11 +96,9 @@ class TestMoney extends PHPUnit_Framework_TestCase
     {
         $fiveBucks = Money::dollar(5);
         $tenFrancs = Money::franc(10);
-        $bank = new Bank();
-        $bank->addRate('CHF', 'USD', 2);
         $step1 = new Sum($fiveBucks, $tenFrancs);
         $sum = $step1->plus($fiveBucks);
-        $result = $bank->reduce($sum, 'USD');
+        $result = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(15), $result);
     }
 
@@ -110,11 +106,9 @@ class TestMoney extends PHPUnit_Framework_TestCase
     {
         $fiveBucks = Money::dollar(5);
         $tenFrancs = Money::franc(10);
-        $bank = new Bank();
-        $bank->addRate('CHF', 'USD', 2);
         $step1 = new Sum($fiveBucks, $tenFrancs);
         $sum = $step1->times(2);
-        $result = $bank->reduce($sum, 'USD');
+        $result = $this->bank->reduce($sum, 'USD');
         $this->assertEquals(Money::dollar(20), $result);
     }
 }
