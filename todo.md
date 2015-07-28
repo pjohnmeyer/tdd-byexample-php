@@ -6,7 +6,7 @@
 - [x] Reduce money with conversion
 - [x] Reduce(Bank, String)
 - [x] Sum::plus
-- [ ] *Expression::times
+- [x] Expression::times
 
 
 
