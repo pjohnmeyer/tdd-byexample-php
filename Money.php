@@ -10,8 +10,8 @@ require_once 'Expression.php';
  */
 class Money implements Expression
 {
-    protected $amount;
-    protected $currency;
+    public $amount;
+    public $currency;
 
     public function __construct($amount, $currency)
     {

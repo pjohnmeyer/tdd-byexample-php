@@ -10,6 +10,7 @@ class Bank
 {
     public function reduce(Expression $source, $to)
     {
-        return Money::dollar(10);
+        $amount = $source->augend->amount + $source->addend->amount;
+        return new Money($amount, $to);
     }
 }
