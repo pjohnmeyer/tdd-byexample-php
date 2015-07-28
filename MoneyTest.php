@@ -77,4 +77,10 @@ class TestMoney extends PHPUnit_Framework_TestCase
         $result = $bank->reduce(Money::franc(2), 'USD');
         $this->assertEquals(Money::dollar(1), $result);
     }
+
+    public function testIdentity()
+    {
+        $bank = new Bank();
+        $this->assertEquals(1, $bank->rate('USD', 'USD'));
+    }
 }
