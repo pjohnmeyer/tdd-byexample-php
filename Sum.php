@@ -29,6 +29,6 @@ class Sum implements Expression
 
     public function plus(Expression $addend)
     {
-        throw new Exception('Unimplemented');
+        return new Sum($this, $addend);
     }
 }
